@@ -172,6 +172,19 @@
   /* ---------- 7, 13. параллакс фото ---------- */
   $$('.full > img, .cta-ph img').forEach(img => gsap.to(img, { scale: 1, yPercent: 6, ease: 'none',
     scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
+  /* ---------- 12. фото у FAQ: плавное появление + параллакс на мобильном ---------- */
+  const faqPh = $('.faq-ph'), faqImg = $('.faq-ph img');
+  if (faqPh && faqImg) {
+    gsap.set(faqImg, { scale: 1.18 });
+    gsap.timeline({ scrollTrigger: { trigger: faqPh, start: 'top 88%' } })
+      .from(faqPh, { clipPath: 'inset(14% 10% 14% 10% round 36px)', opacity: 0, duration: 1.6, ease: 'expo.out' })
+      .from(faqImg, { scale: 1.4, duration: 2, ease: 'expo.out' }, 0);
+    // на десктопе фото и так «едет» (sticky), на мобильном — двигаем картинку внутри рамки
+    gsap.matchMedia().add('(max-width: 900px)', () => {
+      gsap.fromTo(faqImg, { yPercent: -7 }, { yPercent: 7, ease: 'none',
+        scrollTrigger: { trigger: faqPh, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+  }
   gsap.from('.chips span', { y: 16, opacity: 0, stagger: 0.05, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: '.chips', start: 'top 85%' } });
   gsap.from('.gc li', { y: 20, opacity: 0, stagger: 0.04, duration: 0.8, ease: 'expo.out', scrollTrigger: { trigger: '.gcards', start: 'top 75%' } });
 
