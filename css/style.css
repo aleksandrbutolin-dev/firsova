@@ -149,14 +149,9 @@ button{font:inherit;color:inherit}
 .overview .h2{max-width:1180px}
 .cards-pin{margin-top:clamp(56px,6vw,90px);overflow:hidden}
 .cards{display:flex;gap:16px;padding:0 var(--pad);width:max-content;will-change:transform}
-/* телефон: листаем пальцем, карточки встают по краю */
-@media(max-width:900px){
-  .cards-pin{overflow:visible}
-  .cards{width:auto;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--pad);-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-  .cards::-webkit-scrollbar{display:none}
-  .mcard{scroll-snap-align:start;width:min(78vw,320px)}
-}
 .mcard{position:relative;width:clamp(260px,24vw,360px);aspect-ratio:3/4.1;border-radius:var(--radius);overflow:hidden;color:#fff;flex-shrink:0}
+/* телефон: лента едет при прокрутке страницы, как на компьютере — только карточки уже */
+@media(max-width:900px){.mcard{width:min(78vw,320px)}}
 .mcard img{transition:transform 1.4s var(--ease)}
 .mcard:hover img{transform:scale(1.06)}
 .mcard:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 34%,rgba(0,0,0,0) 62%,rgba(0,0,0,.6) 100%)}
